@@ -10,6 +10,14 @@ import SinglePageError from "./pages/SinglePageError";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      staleTime: 1000 * 60 * 5,
+    },
+  },
+});
+
 const router = createBrowserRouter([
   {
     path: "/",
@@ -19,7 +27,7 @@ const router = createBrowserRouter([
       {
         index: true,
         element: <Content />,
-        loader: homeLoader,
+        loader: homeLoader(queryClient),
       },
       {
         path: "/about",
@@ -30,19 +38,11 @@ const router = createBrowserRouter([
         path: "/cocktail/:id",
         element: <SingleCocktail />,
         errorElement: <SinglePageError />,
-        loader: cocktailLoader,
+        loader: cocktailLoader(queryClient),
       },
     ],
   },
 ]);
-
-const queryClient = new QueryClient({
-  defaultOptions: {
-    queries: {
-      staleTime: 1000 * 60 * 5,
-    },
-  },
-});
 
 const App = () => {
   return (

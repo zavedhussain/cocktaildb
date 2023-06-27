@@ -1,18 +1,40 @@
-import { Link, useLoaderData, useParams } from "react-router-dom";
+import { useQuery } from "@tanstack/react-query";
+import { Link, useLoaderData } from "react-router-dom";
 import styled from "styled-components";
 
-export const loader = async ({ params }) => {
-  const { id } = params;
-  const url = "https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=";
+const url = "https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=";
 
-  const response = await fetch(`${url}${id}`);
-  const { drinks } = await response.json();
-  console.log(drinks);
-  return drinks;
+//this function is used to setup query parameters for
+// useQuery Hook and ensureQueryData method
+const fetchSingleCocktail = (id) => {
+  return {
+    queryKey: ["cocktail", id],
+    queryFn: async () => {
+      const response = await fetch(`${url}${id}`);
+      const { drinks } = await response.json();
+      return drinks;
+    },
+  };
 };
 
+//loader takes queryClient to return a query function
+//that is called immediately in App loader,
+//this query function gets search params
+//and returns a promise to fetch data before rendering
+//as well as sets up caching with ensureQueryData
+export const loader =
+  (queryClient) =>
+  async ({ params }) => {
+    const { id } = params;
+    await queryClient.ensureQueryData(fetchSingleCocktail(id));
+    return id;
+  };
+
 const SingleCocktail = () => {
-  const drinks = useLoaderData();
+  const id = useLoaderData();
+
+  const { data: drinks } = useQuery(fetchSingleCocktail(id));
+
   if (drinks === null) {
     return (
       <Wrapper>
