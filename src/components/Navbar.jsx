@@ -6,9 +6,9 @@ const Navbar = () => {
   return (
     <Wrapper>
       <div className="nav-center">
-        <span>
+        <NavLink to="/" className="nav-link">
           <img src={logo} alt="TheCocktailDB" />
-        </span>
+        </NavLink>
         <ul className="links">
           <li>
             <NavLink to="/" className="nav-link">

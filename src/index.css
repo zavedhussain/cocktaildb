@@ -1,5 +1,6 @@
 :root {
   --primary: rgb(63, 98, 18);
+  --primaryLight: rgb(194, 206, 177);
   --secondary: rgb(255, 255, 255);
   --default: rgb(247, 247, 247);
   --input: rgb(241, 245, 248);
@@ -20,12 +21,14 @@ body {
   font-weight: 300;
   background-color: var(--default);
 }
+
 ul {
   list-style-type: none;
 }
 a {
   text-decoration: none;
   color: var(--mainBlack);
+  cursor: pointer;
 }
 .btn {
   padding: 8px 15px;
@@ -34,6 +37,8 @@ a {
   border: none;
   border-radius: 3px;
   display: inline-block;
+  letter-spacing: 0.3rem;
+  cursor: pointer;
 }
 .loading {
   text-align: center;

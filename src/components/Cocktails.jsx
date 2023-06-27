@@ -3,6 +3,15 @@ import styled from "styled-components";
 
 const Cocktails = ({ cocktails }) => {
   console.log(cocktails);
+  if (cocktails === null) {
+    return (
+      <Wrapper>
+        <h2 className="section-title">
+          no cocktails matched your search criteria
+        </h2>
+      </Wrapper>
+    );
+  }
   return (
     <Wrapper>
       <h1 className="header">Cocktails</h1>
@@ -37,6 +46,13 @@ const Wrapper = styled.section`
     text-align: center;
     margin-bottom: 2rem;
     font-size: 2rem;
+  }
+  .section-title {
+    margin-top: 5rem;
+    color: var(--primary);
+    text-align: center;
+    font-size: 2rem;
+    text-transform: capitalize;
   }
   .cocktails-center {
     display: grid;
