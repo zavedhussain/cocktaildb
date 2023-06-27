@@ -1,6 +1,7 @@
 import Searchbar from "./Searchbar";
 import Cocktails from "./Cocktails";
 import { useLoaderData } from "react-router-dom";
+import { useQuery } from "@tanstack/react-query";
 
 export const loader = async ({ request }) => {
   const newUrl = new URL(request.url);
@@ -18,6 +19,13 @@ export const loader = async ({ request }) => {
 
 const Content = () => {
   const { drinks, searchTerm } = useLoaderData();
+  const { isLoading, error, data, isFetching } = useQuery({
+    queryKey: ["repoData"],
+    queryFn: () =>
+      axios
+        .get("https://api.github.com/repos/tannerlinsley/react-query")
+        .then((res) => res.data),
+  });
   // console.log(data);
   return (
     <div>
