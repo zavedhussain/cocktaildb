@@ -37,11 +37,15 @@ const Wrapper = styled.nav`
     max-width: 1170px;
     margin: 0 auto;
     padding: 2rem 0;
+
+    img {
+      width: 250px;
+    }
   }
   .links {
     display: flex;
     gap: 1rem;
-    font-size: 1.5rem;
+    font-size: 1.1rem;
   }
 `;
 
