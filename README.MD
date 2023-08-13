@@ -3,7 +3,7 @@
 A database of drinks and cocktails that you can use to build your own drinks.
 Based on and built using the API: https://www.thecocktaildb.com/api.php
 
-Check out live demo at https://zavedhussain.github.io/cocktaildb.
+Check out live demo at (https://www.the-cocktail-db046.netlify.app)
 
 ![Home](/src/assets/screenshots/home.jpg)
 
